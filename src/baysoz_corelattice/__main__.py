@@ -1,4 +1,4 @@
-"""Module entry point: python -m baysoz_corelattice (Baysöz Labs)."""
+"""Module entry point: python -m baysoz_corelattice — Baysöz Labs <baysozlabs@proton.me>."""
 
 from .cli import main
 
