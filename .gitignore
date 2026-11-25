@@ -1,0 +1,15 @@
+# Baysöz Labs <baysozlabs@proton.me> — baysoz-corelattice
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.semgrep/
+build/
+dist/
+.sarif
+*.sarif
+.coverage
+coverage.xml
+.DS_Store

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "baysoz-corelattice"
+version = "1.0.0"
+description = "Offline eBPF CO-RE relocation conformance oracle with BTF type-drift detection and SARIF CI gates — Baysöz Labs <baysozlabs@proton.me>"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+authors = [{ name = "Baysöz Labs", email = "baysozlabs@proton.me" }]
+maintainers = [{ name = "Baysöz Labs", email = "baysozlabs@proton.me" }]
+keywords = [
+  "ebpf",
+  "btf",
+  "co-re",
+  "observability",
+  "sarif",
+  "baysöz-labs",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Monitoring",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.scripts]
+corelattice = "baysoz_corelattice.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yazilimbaysoz-svg/baysoz-corelattice"
+Repository = "https://github.com/yazilimbaysoz-svg/baysoz-corelattice"
+Issues = "https://github.com/yazilimbaysoz-svg/baysoz-corelattice/issues"
+Maintainer = "mailto:baysozlabs@proton.me"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/baysoz_corelattice"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "S", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]

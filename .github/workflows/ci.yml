@@ -1,0 +1,52 @@
+# Baysöz Labs — systems-observability CI
+
+# Maintainer: Baysöz Labs <baysozlabs@proton.me>
+
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e
+        with:
+          version: "0.13.10"
+
+      - name: Set up Python 3.13
+        run: uv python install 3.13
+
+      - name: Create environment and install package
+        run: |
+          uv venv
+          uv pip install -e .
+          uv pip install pytest ruff semgrep
+
+      - name: Unit and adversarial tests
+        run: uv run pytest -q
+
+      - name: Ruff (E, F, W, S, B)
+        run: uv run ruff check --select E,F,W,S,B .
+
+      - name: Semgrep default ruleset
+        run: uv run semgrep --config p/default --error .
+
+      - name: CLI smoke checks
+        run: |
+          uv run corelattice --version
+          uv run corelattice --help
+
+      - name: Attribution
+        run: echo "Baysöz Labs <baysozlabs@proton.me>"
